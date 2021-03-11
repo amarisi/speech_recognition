@@ -868,7 +868,7 @@ class Recognizer(AudioSource):
             convert_width=2  # audio samples must be 16-bit
         )
         if key is None: key = "AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw"
-        url = "http://www.google.com/speech-api/v2/recognize?{}".format(urlencode({
+        url = "https://www.google.com/speech-api/v2/recognize?{}".format(urlencode({
             "client": "chromium",
             "lang": language,
             "key": key,
@@ -1395,6 +1395,7 @@ class Recognizer(AudioSource):
 def get_flac_converter():
     """Returns the absolute path of a FLAC converter executable, or raises an OSError if none can be found."""
     flac_converter = shutil_which("flac")  # check for installed version first
+    flac_converter = shutil_which("flac-win32.exe")
     if flac_converter is None:  # flac utility is not installed
         base_path = os.path.dirname(os.path.abspath(__file__))  # directory of the current module file, where all the FLAC bundled binaries are stored
         system, machine = platform.system(), platform.machine()
